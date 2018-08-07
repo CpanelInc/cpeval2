@@ -148,7 +148,7 @@ use POSIX qw( strftime );
 use Term::ANSIColor qw(:constants);
 $Term::ANSIColor::AUTORESET = 1;
 
-my $VERSION = '1.39';
+my $VERSION = '1.40';
 
 my $OPTS = opts_get();
 
@@ -3519,6 +3519,7 @@ sub create_cpmig_user {
         if ( open my $sudoers_fh, ">>", $sudoers_include_file ) {
             print $sudoers_fh $sudo_entry . "\n";
             close $sudoers_fh;
+            chmod 0440, $sudoers_include_file;
         }
         if ( open my $sudoers_fh, "<", $sudoers_include_file ) {
             while (<$sudoers_fh>) {
